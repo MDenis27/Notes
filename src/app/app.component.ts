@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     {
       title: 'Catégories',
       url: '/folder/Outbox',
-      icon: 'paper-plane'
+      icon: 'pricetags'
     }
   ];
 
