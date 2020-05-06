@@ -25,7 +25,6 @@ export class CategoriesPage implements OnInit {
   }
 
   getAllCategories() {
-    //Get saved list of notes
     this.api.getListCategories().subscribe(response => {
       this.categories = response;
     })
