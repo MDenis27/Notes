@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from '../service';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -15,7 +13,6 @@ export class CategoriesPage implements OnInit {
   constructor(
     private api: Service,
     private toastController: ToastController,
-    private router: Router,
   ) { this.categories = []; }
 
   ngOnInit() {
@@ -41,11 +38,6 @@ export class CategoriesPage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-
-  nextpage() {
-    this.router.navigate(['/addcategory']);
   }
 
 }
