@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./addcategory/addcategory.module').then( m => m.AddcategoryPageModule)
   },
   {
-    path: 'editcategory',
+    path: 'editcategory/:id',
     loadChildren: () => import('./editcategory/editcategory.module').then( m => m.EditcategoryPageModule)
   }
 ];

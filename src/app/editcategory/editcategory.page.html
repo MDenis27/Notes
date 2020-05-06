@@ -6,4 +6,22 @@
 
 <ion-content>
 
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input [(ngModel)]="data.name" placeholder="Enter the name"></ion-input>
+  </ion-item>
+ 
+
+  <ion-item>
+    <ion-button (click)="update()">
+      <ion-icon name="brush"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['/categories']">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
