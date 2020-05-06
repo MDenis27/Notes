@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Router} from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {Observable, Subject, throwError} from 'rxjs';
+import { Category } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,18 @@ export class Service {
     constructor(private http: HttpClient, private router: Router) { }
 
     getCategories() {
-        return this.http.get(this.ip + '/categories').pipe(
+        return this.http.get(this.ip + 'categories').pipe(
             catchError(this.handelError));
       }
 
     getCategory(id : number) {
-        return this.http.get(this.ip + '/categories/' + id).pipe(
+        return this.http.get(this.ip + 'categories/' + id).pipe(
             catchError(this.handelError));
+    }
+
+    CreateNewCategory(category: Category) {
+      let url = this.ip + "categories";
+        return this.http.post(url, Category).pipe(catchError(this.handelError));
     }
 
     handelError(err) {
