@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddCategoryPageRoutingModule } from './add-category-routing.module';
+import { AddcategoryPageRoutingModule } from './addcategory-routing.module';
 
-import { AddCategoryPage } from './add-category.page';
+import { AddcategoryPage } from './addcategory.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddCategoryPageRoutingModule
+    AddcategoryPageRoutingModule
   ],
-  declarations: [AddCategoryPage]
+  declarations: [AddcategoryPage]
 })
-export class AddCategoryPageModule {}
+export class AddcategoryPageModule {}
