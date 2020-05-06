@@ -39,4 +39,12 @@ export class CategoriesPage implements OnInit {
     toast.present();
   }
 
+  delete(item) {
+    this.api.deleteCategory(item.id).subscribe(Response => {
+      //Update list after delete is successful
+      this.getAllCategories();
+      this.presentToast()
+    });
+  }
+
 }
