@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'addcategory',
     loadChildren: () => import('./addcategory/addcategory.module').then( m => m.AddcategoryPageModule)
+  },
+  {
+    path: 'editcategory',
+    loadChildren: () => import('./editcategory/editcategory.module').then( m => m.EditcategoryPageModule)
   }
 ];
 
