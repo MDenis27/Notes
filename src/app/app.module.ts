@@ -17,9 +17,9 @@ import { Service } from './service';
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
   ],
   providers: [
     Service,

@@ -15,7 +15,7 @@ export class Service {
     constructor(private http: HttpClient, private router: Router) { }
 
     getCategories() {
-        return this.http.get(this.ip + 'categories').pipe(
+        return this.http.get('http://laboweb.ecam.be/notepad_s4/public/index.php/api/categories').pipe(
             catchError(this.handelError));
       }
 
