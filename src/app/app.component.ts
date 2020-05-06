@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Notes',
-      url: '/folder/Inbox',
+      url: '/notes',
       icon: 'list'
     },
     {

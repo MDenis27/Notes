@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Service } from '../service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-notes',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotesPage implements OnInit {
 
-  constructor() { }
+  notes : any;
+
+  constructor(
+    private api: Service,
+    private toastController: ToastController
+  ) { this.notes = []}
 
   ngOnInit() {
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Note deleted',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  ionViewWillEnter() {
+    this.api.getListNotes().subscribe(response => {
+      this.notes = response;
+    })
   }
 
 }

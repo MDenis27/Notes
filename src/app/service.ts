@@ -72,6 +72,16 @@ export class Service {
         )
     }
 
+    // Get notes data
+  getListNotes(): Observable<Note> {
+    return this.http
+      .get<Note>(this.base_path + 'notes')
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
     // Handle API errors
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
