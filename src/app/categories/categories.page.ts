@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from "../model";
-import {Service} from '../service';
-import {Router} from "@angular/router";
-import { NavController } from "@ionic/angular";
-import { AddcategoryPage } from "../addcategory/addcategory.page";
-import { HttpClient } from '@angular/common/http';
+import { Service } from '../service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,37 +10,42 @@ import { Observable } from 'rxjs';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
-  data: string;
+  categories: any;
 
   constructor(
     private api: Service,
-    private router : Router,
-    private http: HttpClient
-  ) { this.data = ''; }
-
-  ionViewWillEnter() {
-    // Load the data
-    this.prepareDataRequest()
-      .subscribe(
-        data => {
-          // Set the data to display in the template
-          this.data = JSON.parse(JSON.stringify(data));
-        }
-      );
-  }
+    private toastController: ToastController,
+    private router: Router,
+  ) { this.categories = []; }
 
   ngOnInit() {
   }
 
-  nextpage() {
-    this.router.navigate(['/addcategory']);
+  ionViewWillEnter() {
+    // Used ionViewWillEnter as ngOnInit is not 
+    // called due to view persistence in Ionic
+    this.getAllCategories();
   }
 
-  private prepareDataRequest(): Observable<object> {
-    // Define the data URL
-    const dataUrl = 'http://laboweb.ecam.be/notepad_s4/public/index.php/api/categories';
-    // Prepare the request
-    return this.http.get(dataUrl);
+  getAllCategories() {
+    //Get saved list of notes
+    this.api.getListCategories().subscribe(response => {
+      console.log(response);
+      this.categories = response;
+    })
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Category deleted',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+  nextpage() {
+    this.router.navigate(['/addcategory']);
   }
 
 }

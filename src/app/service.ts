@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {Observable, Subject, throwError} from 'rxjs';
 import { Category } from './model';
 
@@ -10,30 +10,82 @@ import { Category } from './model';
 })
 export class Service {
 
-    public ip = 'http://laboweb.ecam.be/notepad_s4/public/index.php/api/'
+    //API path
+  base_path = 'http://laboweb.ecam.be/notepad_s4/public/index.php/api/';
 
-    constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-    getCategories() {
-        return this.http.get('http://laboweb.ecam.be/notepad_s4/public/index.php/api/categories').pipe(
-            catchError(this.handelError));
-      }
+  // Http Options
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
-    getCategory(id : number) {
-        return this.http.get(this.ip + 'categories/' + id).pipe(
-            catchError(this.handelError));
+  // Get categories data
+  getListCategories(): Observable<Category> {
+    return this.http
+      .get<Category>(this.base_path + 'categories')
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  // Get categories data by id
+  getCategory(id): Observable<Category> {
+    return this.http
+      .get<Category>(this.base_path + 'categories/' + id)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  // Update category by id
+  updateCategory(id, item): Observable<Category> {
+    return this.http
+      .put<Category>(this.base_path + 'categories/' + id, JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  // Delete category by id
+  deleteCategory(id){
+      return this.http
+        .delete<Category>(this.base_path + 'categories/' + id, this.httpOptions)
+        .pipe(
+          retry(2),
+            catchError(this.handleError)
+        )
+  }
+
+    // Create a new category
+    createItemCategories(item): Observable<Category> {
+      return this.http
+        .post<Category>(this.base_path + 'categories', JSON.stringify(item), this.httpOptions)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
     }
 
-    CreateNewCategory(category: Category) {
-      let url = this.ip + "categories";
-        return this.http.post(url, Category).pipe(catchError(this.handelError));
+    // Handle API errors
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
-
-    handelError(err) {
-        if (err instanceof HttpErrorResponse) {
-          return throwError(err.error.error);
-        } else {
-          return throwError(err.message);
-        }
-      }
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
+  };
 }

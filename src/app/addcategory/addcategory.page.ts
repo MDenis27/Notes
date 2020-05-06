@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Service } from '../service';
 import { Category } from '../model';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-addcategory',
@@ -26,22 +27,12 @@ export class AddcategoryPage implements OnInit {
   public error: any;
 
   logForm() {
-    console.log(this.cat);
-    const cati : Category = {
-      Name: this.cat["name"],
-    }
-    this.api.CreateNewCategory(cati).subscribe(urldata=>{
-      if(urldata['result']){
-        this.router.navigate(['/categories']);
-      }
-    },error =>{
-      this.error = error
-    } );
   }
 
   constructor(
     private api: Service,
     private router : Router,
+    public httpClient: HttpClient
     ) { }
 
   ngOnInit() {
