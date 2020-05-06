@@ -1,11 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-row>
       <ion-title>Categories</ion-title>
-      <ion-button (click)="nextpage()">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -27,4 +22,10 @@
   </ion-item-sliding>
 
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['/addcategory']">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
