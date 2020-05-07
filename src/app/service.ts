@@ -102,6 +102,15 @@ export class Service {
     )
 }
 
+createNote(item): Observable<Note> {
+  return this.http
+    .post<Note>(this.base_path + 'notes', JSON.stringify(item), this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+}
+
     // Handle API errors
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
