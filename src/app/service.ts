@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Router} from '@angular/router';
 import {catchError, retry} from 'rxjs/operators';
 import {Observable, Subject, throwError} from 'rxjs';
-import { Category } from './model';
+import { Category, Note } from './model';
 
 @Injectable({
   providedIn: 'root'
