@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>noteinfo</ion-title>
+    <ion-title>{{data.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding" >
+
+  <ion-text color="primary">
+  </ion-text>
+  <h4>{{category.name}} - {{data.date}}</h4>
+  <p>{{data.content}}</p>
+  
+  
+  
+   <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['/notes']">
+      <ion-fab-button>
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
 </ion-content>
