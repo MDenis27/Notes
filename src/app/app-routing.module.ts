@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'notes',
     loadChildren: () => import('./notes/notes.module').then( m => m.NotesPageModule)
+  },
+  {
+    path: 'editnote/:id',
+    loadChildren: () => import('./editnote/editnote.module').then( m => m.EditnotePageModule)
+  },
+  {
+    path: 'noteinfo/:id',
+    loadChildren: () => import('./noteinfo/noteinfo.module').then( m => m.NoteinfoPageModule)
   }
 ];
 
