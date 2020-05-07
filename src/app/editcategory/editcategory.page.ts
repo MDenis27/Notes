@@ -30,7 +30,7 @@ export class EditcategoryPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Category updated',
+      message: 'Catégorie modifiée',
       duration: 2000
     });
     toast.present();

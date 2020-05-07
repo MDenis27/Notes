@@ -41,7 +41,7 @@ export class EditnotePage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Note updated',
+      message: 'Note modifiée',
       duration: 2000
     });
     toast.present();

@@ -44,7 +44,7 @@ export class CategoriesPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Category deleted',
+      message: 'Catégorie suprimée',
       duration: 2000
     });
     toast.present();

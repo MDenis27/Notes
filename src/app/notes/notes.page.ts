@@ -21,7 +21,7 @@ export class NotesPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Note deleted',
+      message: 'Note suprimée',
       duration: 2000
     });
     toast.present();

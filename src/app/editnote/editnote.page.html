@@ -1,23 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Note</ion-title>
+    <ion-title>Modifier note</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
   <ion-item>
-    <ion-label>Title</ion-label>
+    <ion-label>Titre</ion-label>
     <ion-input [(ngModel)]="data.title" placeholder="Enter Title"></ion-input>
   </ion-item>
  
   <ion-item>
-    <ion-label>Content</ion-label>
+    <ion-label>Contenu</ion-label>
     <ion-input [(ngModel)]="data.content" placeholder="Enter Content"></ion-input>
   </ion-item>
  
  <ion-item>
-    <ion-label>Category</ion-label>
+    <ion-label>Catégorie</ion-label>
     <ion-select [(ngModel)]='data.category'>
       <ion-select-option *ngFor="let cat of categories"  value='{"id":{{cat.id}}, "name":"{{cat.name}}"}'>{{cat.name}}</ion-select-option>
     </ion-select>

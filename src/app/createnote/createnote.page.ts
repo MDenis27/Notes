@@ -38,7 +38,7 @@ export class CreatenotePage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Note created',
+      message: 'Note créée',
       duration: 2000
     });
     toast.present();
