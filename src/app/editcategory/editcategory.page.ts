@@ -23,9 +23,7 @@ export class EditcategoryPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params["id"];
-    //get item details using id
     this.api.getCategory(this.id).subscribe(response => {
-      console.log(response);
       this.data = response;
     })
   }

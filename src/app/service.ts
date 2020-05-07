@@ -10,7 +10,6 @@ import { Category, Note } from './model';
 })
 export class Service {
 
-    //API path
   base_path = 'http://laboweb.ecam.be/notepad_s4/public/index.php/api/';
 
   constructor(private http: HttpClient) { }
@@ -22,7 +21,6 @@ export class Service {
     })
   }
 
-  // Get categories data
   getListCategories(): Observable<Category> {
     return this.http
       .get<Category>(this.base_path + 'categories')
@@ -32,7 +30,6 @@ export class Service {
       )
   }
 
-  // Get categories data by id
   getCategory(id): Observable<Category> {
     return this.http
       .get<Category>(this.base_path + 'categories/' + id)
@@ -42,7 +39,6 @@ export class Service {
       )
   }
 
-  // Update category by id
   updateCategory(id, item): Observable<Category> {
     return this.http
       .put<Category>(this.base_path + 'categories/' + id, JSON.stringify(item), this.httpOptions)
@@ -52,7 +48,6 @@ export class Service {
       )
   }
 
-  // Delete category by id
   deleteCategory(id){
       return this.http
         .delete<Category>(this.base_path + 'categories/' + id, this.httpOptions)
@@ -62,20 +57,36 @@ export class Service {
         )
   }
 
-    // Create a new category
-    createItemCategories(item): Observable<Category> {
-      return this.http
-        .post<Category>(this.base_path + 'categories', JSON.stringify(item), this.httpOptions)
-        .pipe(
-          retry(2),
-          catchError(this.handleError)
-        )
-    }
+  createItemCategories(item): Observable<Category> {
+    return this.http
+      .post<Category>(this.base_path + 'categories', JSON.stringify(item), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 
-    // Get notes data
   getListNotes(): Observable<Note> {
     return this.http
       .get<Note>(this.base_path + 'notes')
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  getNote(id): Observable<Note> {
+    return this.http
+      .get<Note>(this.base_path + 'notes/' + id)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  updateNote(id, item): Observable<Note> {
+    return this.http
+      .put<Note>(this.base_path + 'notes/' + id, JSON.stringify(item), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

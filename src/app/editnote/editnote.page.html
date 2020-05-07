@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>editnote</ion-title>
+    <ion-title>Edit Note</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-label>Title</ion-label>
+    <ion-input [(ngModel)]="data.title" placeholder="Enter Title"></ion-input>
+  </ion-item>
+ 
+  <ion-item>
+    <ion-label>Content</ion-label>
+    <ion-input [(ngModel)]="data.content" placeholder="Enter Content"></ion-input>
+  </ion-item>
+ 
+ <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]='data.category'>
+      <ion-select-option *ngFor="let cat of categories"  value='{"id":{{cat.id}}, "name":"{{cat.name}}"}'>{{cat.name}}</ion-select-option>
+    </ion-select>
+</ion-item>
+
+
+
+  <ion-item>
+    <ion-button (click)="update()">Update
+    </ion-button>
+  </ion-item>
+
+
+
+ <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['/notes']">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
