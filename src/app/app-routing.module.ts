@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'noteinfo/:id',
     loadChildren: () => import('./noteinfo/noteinfo.module').then( m => m.NoteinfoPageModule)
+  },
+  {
+    path: 'createnote',
+    loadChildren: () => import('./createnote/createnote.module').then( m => m.CreatenotePageModule)
   }
 ];
 
