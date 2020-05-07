@@ -28,9 +28,20 @@ export class NotesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.api.getListNotes().subscribe(response => {
+    this.getNotes();
+  }
+
+  getNotes() {
+    this.api.getNotes().subscribe(response => {
       this.notes = response;
     })
+  }
+
+  delete(item) {
+    this.api.deleteNote(item.id).subscribe(_Response => {
+      this.getNotes();
+      this.presentToast()
+    });
   }
 
   

@@ -66,7 +66,7 @@ export class Service {
       )
   }
 
-  getListNotes(): Observable<Note> {
+  getNotes(): Observable<Note> {
     return this.http
       .get<Note>(this.base_path + 'notes')
       .pipe(
@@ -92,6 +92,15 @@ export class Service {
         catchError(this.handleError)
       )
   }
+
+  deleteNote(id) {
+    return this.http
+    .delete<Note>(this.base_path + 'notes/' + id, this.httpOptions)
+    .pipe(
+     retry(2),
+      catchError(this.handleError)
+    )
+}
 
     // Handle API errors
   handleError(error: HttpErrorResponse) {
