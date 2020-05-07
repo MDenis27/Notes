@@ -8,25 +8,37 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
+
   categories: any;
+  notes: any;
+  note: any;
 
   constructor(
     private api: Service,
     private toastController: ToastController,
-  ) { this.categories = []; }
+  ) { 
+    this.categories = [];
+    this.notes = [];
+    this.note = [];
+   }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    // Used ionViewWillEnter as ngOnInit is not 
-    // called due to view persistence in Ionic
-    this.getAllCategories();
+    this.getCategories();
+    this.getNotes();
   }
 
-  getAllCategories() {
+  getCategories() {
     this.api.getListCategories().subscribe(response => {
       this.categories = response;
+    })
+  }
+
+  getNotes() {
+    this.api.getNotes().subscribe(response => {
+      this.notes = response;
     })
   }
 
@@ -39,9 +51,16 @@ export class CategoriesPage implements OnInit {
   }
 
   delete(item) {
+    this.notes.forEach(element => {
+      console.log(element)
+      if(item.id == element.category.id){
+        this.api.deleteNote(element.id).subscribe(Response => {
+        });
+      }
+    });
     this.api.deleteCategory(item.id).subscribe(Response => {
-      //Update list after delete is successful
-      this.getAllCategories();
+      this.getCategories();
+      this.getNotes();
       this.presentToast()
     });
   }
